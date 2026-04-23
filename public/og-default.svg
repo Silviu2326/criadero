@@ -1,0 +1,27 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FAF8F5"/>
+      <stop offset="1" stop-color="#F5F0E8"/>
+    </linearGradient>
+    <radialGradient id="orb1" cx="0.2" cy="0.2" r="0.6">
+      <stop offset="0" stop-color="rgba(201,162,39,0.25)"/>
+      <stop offset="1" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="0.8" cy="0.3" r="0.5">
+      <stop offset="0" stop-color="rgba(74,93,82,0.2)"/>
+      <stop offset="1" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="orb3" cx="0.5" cy="0.9" r="0.5">
+      <stop offset="0" stop-color="rgba(184,123,92,0.18)"/>
+      <stop offset="1" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="200" cy="150" r="300" fill="url(#orb1)"/>
+  <circle cx="1000" cy="200" r="280" fill="url(#orb2)"/>
+  <circle cx="600" cy="600" r="260" fill="url(#orb3)"/>
+  <text x="600" y="300" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="72" font-weight="800" fill="#1A1A1A" letter-spacing="-0.02em">Petwellly</text>
+  <text x="600" y="370" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="32" font-weight="500" fill="#4A4A4A">ERP para Criadores de Perros Profesionales</text>
+  <rect x="500" y="420" width="200" height="4" rx="2" fill="#C9A227"/>
+</svg>
