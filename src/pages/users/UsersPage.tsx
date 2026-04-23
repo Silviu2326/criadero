@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
 import { usersApi } from '@/services/api';
-import { UserCog, Plus, Search } from 'lucide-react';
+import { UserCog, Search } from 'lucide-react';
 
 const roleLabels: Record<string, string> = {
   MANAGER: 'Administrador',
