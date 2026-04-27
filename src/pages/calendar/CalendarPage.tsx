@@ -28,13 +28,7 @@ export function CalendarPage() {
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const { data: myKennels } = useQuery(
-    'myKennelsCalendarPage',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   // Calculate date range for fetching events
   const dateRange = useMemo(() => {

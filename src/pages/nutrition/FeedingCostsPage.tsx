@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from 'react-query';
-import { nutritionApi, kennelsApi } from '@/services/api';
+import { nutritionApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { DollarSign, TrendingUp, Dog } from 'lucide-react';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -13,13 +13,7 @@ export function FeedingCostsPage() {
   const [dateFrom, setDateFrom] = useState(format(startOfMonth(new Date()), 'yyyy-MM-dd'));
   const [dateTo, setDateTo] = useState(format(endOfMonth(new Date()), 'yyyy-MM-dd'));
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: costsData, isLoading } = useQuery(
     ['nutrition-feeding-costs', kennelId, dateFrom, dateTo],

@@ -33,8 +33,7 @@ export function ReviewsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ status: '', source: '' });
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isManager });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: reviewsRes, isLoading } = useQuery(['reviews', kennelId], () => reviewsApi.getReviews({ kennelId }), { enabled: !!kennelId });
   const reviews = (reviewsRes?.data?.reviews || []) as any[];

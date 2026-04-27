@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
-import { nutritionApi, kennelsApi } from '@/services/api';
+import { nutritionApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Plus, Trash2 } from 'lucide-react';
@@ -27,13 +27,7 @@ export function RecipeCreatePage() {
     { name: string; quantity: number; unit: string; costPerUnit?: number; notes?: string }[]
   >([{ name: '', quantity: 0, unit: 'g' }]);
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const {
     register,

@@ -22,8 +22,7 @@ export function GeneticsTestsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ result: '' });
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isBreeder });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: testsRes, isLoading } = useQuery(['geneticTests', kennelId], () => geneticsApi.getGeneticTests({ kennelId }), { enabled: !!kennelId });
   const tests = (testsRes?.data?.tests || []) as any[];

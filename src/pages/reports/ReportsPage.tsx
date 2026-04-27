@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { reportsApi, kennelsApi } from '@/services/api';
+import { reportsApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import {
   BarChart3,
@@ -51,18 +51,12 @@ export function ReportsPage() {
     endDate: format(new Date(), 'yyyy-MM-dd'),
   });
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: true }
-  );
-
-  // Manager can select any kennel from their list; breeder uses their own
+    // Manager can select any kennel from their list; breeder uses their own
   const [selectedKennelId, setSelectedKennelId] = useState<string | undefined>(
-    myKennels?.[0]?.id
+    user?.kennelId
   );
 
-  const activeKennelId = selectedKennelId || myKennels?.[0]?.id;
+  const activeKennelId = selectedKennelId || user?.kennelId;
 
   const { data: kennelReport } = useQuery(
     ['kennelReport', activeKennelId, dateRange],
@@ -114,19 +108,7 @@ export function ReportsPage() {
         variant="bento"
         action={
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            {isManager && myKennels && myKennels.length > 0 && (
-              <select
-                value={activeKennelId}
-                onChange={(e) => setSelectedKennelId(e.target.value)}
-                className="input-apple select-apple text-sm py-2 px-3"
-              >
-                {myKennels.map((kennel: any) => (
-                  <option key={kennel.id} value={kennel.id}>
-                    {kennel.name}
-                  </option>
-                ))}
-              </select>
-            )}
+            
             <div className="flex items-center gap-2">
               <input
                 type="date"

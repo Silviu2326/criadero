@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { dogsApi, kennelsApi, breedsApi } from '@/services/api';
+import { dogsApi, breedsApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ActionDropdown } from '@/components/ui/ActionDropdown';
@@ -104,13 +104,7 @@ export function DogsPage() {
   const itemsPerPage = 12;
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder || user?.role === 'VETERINARIAN' }
-  );
-
-  const kennelId = searchParams.get('kennelId') || myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogs, isLoading } = useQuery(
     ['dogs', kennelId, filters.status, filters.gender, filters.visibility, filters.breedId, filters.fatherId, filters.motherId, filters.birthDateFrom, filters.birthDateTo, search],

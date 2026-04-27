@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { inspectionsApi, kennelsApi, dogsApi, littersApi, usersApi } from '@/services/api';
+import { inspectionsApi, dogsApi, littersApi, usersApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -51,11 +51,7 @@ export function InspectionCreatePage() {
   const { addNotification } = useUIStore();
   const [selectedType, setSelectedType] = useState<InspectionType>('HEALTH');
 
-  const { data: myKennels } = useQuery('myKennels', () =>
-    kennelsApi.getMyKennels().then((r) => r.data.kennels)
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+  const kennelId = user?.kennelId;
 
   const { data: dogsData } = useQuery(
     ['dogs', kennelId],

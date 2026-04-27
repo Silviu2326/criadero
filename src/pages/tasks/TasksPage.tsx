@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
-import { tasksApi, kennelsApi } from '@/services/api';
+import { tasksApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -69,13 +69,7 @@ export function TasksPage() {
   const [draggedTaskId, setDraggedTaskId] = useState<string | null>(null);
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder || user?.role === 'VETERINARIAN' }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: tasksData, isLoading: tasksLoading } = useQuery(
     ['tasks', kennelId],

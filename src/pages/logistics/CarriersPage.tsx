@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
-import { logisticsApi, kennelsApi } from '@/services/api';
+import { logisticsApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { PageHeader } from '@/components/common/PageHeader';
 import { cn } from '@/utils/cn';
@@ -13,12 +13,7 @@ export function CarriersPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ certified: '', active: '' });
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: carriersRes, isLoading } = useQuery(
     ['carriers', kennelId],

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
-import { clientReportApi, kennelsApi } from '@/services/api';
+import { clientReportApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { Plus, Search, FileText, Trash2, ArrowRight, CheckCircle } from 'lucide-react';
@@ -29,13 +29,7 @@ export function ClientReportsPage() {
   const [statusFilter, setStatusFilter] = useState('');
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: reportsData, isLoading } = useQuery(
     ['client-reports', kennelId, statusFilter],

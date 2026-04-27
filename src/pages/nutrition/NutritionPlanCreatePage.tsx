@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { nutritionApi, kennelsApi, breedsApi } from '@/services/api';
+import { nutritionApi, breedsApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, ChefHat } from 'lucide-react';
@@ -29,18 +29,12 @@ export function NutritionPlanCreatePage() {
   const navigate = useNavigate();
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const { data: breedsData } = useQuery(
+    const { data: breedsData } = useQuery(
     'breeds',
     () => breedsApi.getAll().then((r) => r.data.breeds)
   );
 
-  const kennelId = myKennels?.[0]?.id;
+  const kennelId = user?.kennelId;
   const breeds = breedsData || [];
 
   const {

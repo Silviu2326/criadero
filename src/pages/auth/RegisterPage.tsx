@@ -6,11 +6,12 @@ import { useMutation } from 'react-query';
 import { authApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
-import { Loader2, Mail, Lock, User, Phone, ArrowLeft } from 'lucide-react';
+import { Loader2, Mail, Lock, User, Phone, ArrowLeft, Building2 } from 'lucide-react';
 
 const registerSchema = z.object({
   firstName: z.string().min(2, 'Nombre muy corto'),
   lastName: z.string().min(2, 'Apellido muy corto'),
+  kennelName: z.string().min(2, 'Nombre del criadero muy corto'),
   email: z.string().email('Email inválido'),
   phone: z.string().optional(),
   password: z.string().min(8, 'Mínimo 8 caracteres'),
@@ -140,6 +141,28 @@ export function RegisterPage() {
                 </p>
               )}
             </div>
+          </div>
+
+          {/* Kennel Name */}
+          <div>
+            <label className="block text-sm font-medium text-apple-black mb-2">
+              Nombre del criadero
+            </label>
+            <div className="relative">
+              <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-apple-gray-100" size={18} />
+              <input
+                type="text"
+                {...register('kennelName')}
+                className="w-full pl-11 pr-4 py-3 bg-apple-gray/40 border border-apple-gray-300 rounded-xl text-sm text-apple-black placeholder:text-apple-gray-100 focus:outline-none focus:border-[#4A5D52] focus:ring-4 focus:ring-[#4A5D52]/10 transition-all"
+                placeholder="Ej: Criadero del Sol"
+              />
+            </div>
+            {errors.kennelName && (
+              <p className="mt-1.5 text-xs text-[#A14E4E] flex items-center gap-1">
+                <span className="inline-block w-1 h-1 rounded-full bg-[#A14E4E]" />
+                {errors.kennelName.message}
+              </p>
+            )}
           </div>
 
           {/* Email */}

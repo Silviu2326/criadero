@@ -25,8 +25,7 @@ export function StaffSchedulePage() {
   const isManager = user?.role === 'MANAGER';
   const [weekStart, setWeekStart] = useState(startOfWeek(new Date(), { weekStartsOn: 1 }));
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isManager });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const dateFrom = format(weekStart, 'yyyy-MM-dd');
   const dateTo = format(addDays(weekStart, 6), 'yyyy-MM-dd');

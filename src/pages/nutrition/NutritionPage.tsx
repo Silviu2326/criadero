@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { nutritionApi, kennelsApi } from '@/services/api';
+import { nutritionApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import {
   Plus,
@@ -38,13 +38,7 @@ export function NutritionPage() {
   const { user } = useAuthStore();
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dietsData } = useQuery(
     ['nutrition-diets', kennelId],

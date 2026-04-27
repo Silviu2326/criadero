@@ -30,13 +30,7 @@ export function HealthCertsPage() {
   const [selectedCert, setSelectedCert] = useState<Document | null>(null);
   const [showUploadModal, setShowUploadModal] = useState(false);
 
-  const { data: myKennels } = useQuery(
-    'myKennelsHealthCerts',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: healthCerts } = useQuery(
     ['healthCerts', kennelId],

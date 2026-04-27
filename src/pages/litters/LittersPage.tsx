@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { littersApi, kennelsApi } from '@/services/api';
+import { littersApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import {
   Baby,
@@ -29,13 +29,7 @@ export function LittersPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: litters, isLoading } = useQuery(
     ['litters', kennelId],

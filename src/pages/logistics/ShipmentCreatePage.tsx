@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { logisticsApi, kennelsApi, dogsApi, customersApi } from '@/services/api';
+import { logisticsApi, dogsApi, customersApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Loader2, Truck, MapPin, Calendar, DollarSign, Package, User, FileText, ExternalLink } from 'lucide-react';
@@ -30,12 +30,7 @@ export function ShipmentCreatePage() {
   const { addNotification } = useUIStore();
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogs } = useQuery(
     ['dogs', kennelId],

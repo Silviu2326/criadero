@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { customersApi, kennelsApi } from '@/services/api';
+import { customersApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Loader2, User, Mail, Phone, MapPin, FileText } from 'lucide-react';
@@ -22,13 +22,7 @@ export function CustomerCreatePage() {
   const { user } = useAuthStore();
   const { addNotification } = useUIStore();
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: user?.role === 'MANAGER' || user?.role === 'BREEDER' }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const {
     register,

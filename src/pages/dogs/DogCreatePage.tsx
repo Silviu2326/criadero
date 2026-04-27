@@ -6,6 +6,7 @@ import { dogsApi, breedsApi, kennelsApi } from '@/services/api';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Loader2, Upload, X, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '@/store/authStore';
 
 interface DogFormData {
   name: string;
@@ -25,23 +26,19 @@ interface DogFormData {
 
 export function DogCreatePage() {
   const navigate = useNavigate();
+  const { user } = useAuthStore();
   const { addNotification } = useUIStore();
   const [photos, setPhotos] = useState<string[]>([]);
 
-  const { data: kennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels)
-  );
-
-  const { data: breeds } = useQuery(
+    const { data: breeds } = useQuery(
     'breeds',
     () => breedsApi.getAll().then((r) => r.data.breeds)
   );
 
   const { data: availableParents } = useQuery(
     'parents',
-    () => dogsApi.getParents({ kennelId: kennels?.[0]?.id || '', gender: 'MALE' }).then((r) => r.data.dogs),
-    { enabled: !!kennels?.[0]?.id }
+    () => dogsApi.getParents({ kennelId: user?.kennelId || '', gender: 'MALE' }).then((r) => r.data.dogs),
+    { enabled: !!user?.kennelId }
   );
 
   const {
@@ -60,7 +57,7 @@ export function DogCreatePage() {
     async (data: DogFormData) => {
       const response = await dogsApi.create({
         ...data,
-        kennelId: kennels?.[0]?.id || '',
+        kennelId: user?.kennelId || '',
         photos,
         price: data.price ? parseFloat(data.price) : undefined,
       });

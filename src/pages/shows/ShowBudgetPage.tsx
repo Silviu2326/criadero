@@ -29,8 +29,7 @@ export function ShowBudgetPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ category: '', paid: '' });
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isBreeder });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: budgetRes, isLoading } = useQuery(['showBudget', kennelId], () => showsApi.getShowBudget({ kennelId }), { enabled: !!kennelId });
   const items = (budgetRes?.data?.budgetItems || []) as any[];

@@ -24,13 +24,7 @@ export function ContractsPage() {
   const [selectedContract, setSelectedContract] = useState<Document | null>(null);
   const [showGenerator, setShowGenerator] = useState(false);
 
-  const { data: myKennels } = useQuery(
-    'myKennelsContracts',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: contracts } = useQuery(
     ['contracts', kennelId],

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { inspectionsApi, kennelsApi } from '@/services/api';
+import { inspectionsApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { PageHeader } from '@/components/common/PageHeader';
 import { Inspection, InspectionStatus, InspectionType, InspectionResult } from '@/types';
@@ -62,13 +62,7 @@ export function InspectionsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder || user?.role === 'VETERINARIAN' }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: inspectionsData, isLoading } = useQuery(
     ['inspections', kennelId],

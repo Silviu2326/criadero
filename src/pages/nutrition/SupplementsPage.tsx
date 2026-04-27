@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
-import { nutritionApi, kennelsApi, dogsApi } from '@/services/api';
+import { nutritionApi, dogsApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Pill, Plus, Trash2 } from 'lucide-react';
@@ -17,13 +17,7 @@ export function SupplementsPage() {
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
   const [showForm, setShowForm] = useState(false);
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogsData } = useQuery(
     ['dogs', kennelId],

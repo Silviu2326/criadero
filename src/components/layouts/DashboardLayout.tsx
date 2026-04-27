@@ -2,27 +2,23 @@ import { Outlet } from 'react-router-dom';
 import { Sidebar } from '@/components/common/Sidebar';
 import { Header } from '@/components/common/Header';
 import { NotificationToast } from '@/components/common/NotificationToast';
-import { useUIStore } from '@/store/uiStore';
-import { cn } from '@/utils/cn';
 
 export function DashboardLayout() {
-  useUIStore();
-
   return (
-    <div className="min-h-screen bg-apple-gray">
-      <Header />
-      <div className="flex pt-16">
-        <Sidebar />
-        <main
-          className={cn(
-            'flex-1 p-6 lg:p-8 transition-all duration-300 min-h-[calc(100vh-4rem)]'
-          )}
-        >
+    <div className="min-h-screen bg-dashboard-bg">
+      {/* Fixed Sidebar */}
+      <Sidebar />
+
+      {/* Main content area with left margin for sidebar on desktop */}
+      <div className="lg:ml-[260px] min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 p-4 lg:p-8">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>
         </main>
       </div>
+
       <NotificationToast />
     </div>
   );

@@ -36,8 +36,7 @@ export function StaffPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ role: '', status: '' });
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isManager });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: employeesRes, isLoading } = useQuery(['employees', kennelId], () => staffApi.getEmployees({ kennelId }), { enabled: !!kennelId });
   const employees = (employeesRes?.data?.employees || []) as any[];

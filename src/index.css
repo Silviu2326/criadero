@@ -7,6 +7,33 @@
    ============================================ */
 
 :root {
+  /* Dashboard Sidebar */
+  --sidebar-bg: #0D5C4A;
+  --sidebar-dark: #094A3B;
+  --sidebar-text: #FFFFFF;
+  --sidebar-text-muted: rgba(255,255,255,0.6);
+  --sidebar-icon-bg: rgba(255,255,255,0.12);
+  --sidebar-active-icon: #22C55E;
+  --sidebar-divider: rgba(255,255,255,0.1);
+
+  /* Dashboard Content */
+  --dashboard-bg: #F0F4F1;
+  --dashboard-card: #FFFFFF;
+  --dashboard-border: #E8EDE9;
+  --dashboard-text-primary: #1A1A1A;
+  --dashboard-text-secondary: #6B7B72;
+  --dashboard-text-muted: #9AA89E;
+
+  /* Accent Colors */
+  --accent-green: #22C55E;
+  --accent-green-bg: #DCFCE7;
+  --accent-blue: #3B82F6;
+  --accent-blue-bg: #DBEAFE;
+  --accent-purple: #8B5CF6;
+  --accent-purple-bg: #EDE9FE;
+  --accent-orange: #F97316;
+  --accent-orange-bg: #FFEDD5;
+
   /* Warm Earth + Pine Green Colors */
   --apple-blue: #4A5D52;
   --apple-blue-hover: #3D4D44;

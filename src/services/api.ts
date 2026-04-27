@@ -40,7 +40,7 @@ export const authApi = {
   login: (email: string, password: string) =>
     api.post('/auth/login', { email, password }),
 
-  register: (data: { email: string; password: string; firstName: string; lastName: string; phone?: string }) =>
+  register: (data: { email: string; password: string; firstName: string; lastName: string; phone?: string; kennelName?: string }) =>
     api.post('/auth/register', data),
 
   getMe: () => api.get('/auth/me'),
@@ -92,7 +92,7 @@ export const kennelsApi = {
   getAll: (params?: { search?: string; status?: string }) =>
     api.get('/kennels', { params }),
 
-  getMyKennels: () => api.get('/kennels/my-kennels'),
+  getMyKennel: () => api.get('/kennels/my-kennel'),
 
   getById: (id: string) => api.get(`/kennels/${id}`),
 

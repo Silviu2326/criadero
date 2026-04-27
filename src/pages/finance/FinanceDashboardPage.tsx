@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { financeApi, kennelsApi } from '@/services/api';
+import { financeApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import {
@@ -75,13 +75,7 @@ export function FinanceDashboardPage() {
   const [showExportMenu, setShowExportMenu] = useState(false);
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: summary, isLoading: summaryLoading } = useQuery(
     ['financeSummary', kennelId, period],

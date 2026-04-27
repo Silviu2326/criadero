@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { customersApi, kennelsApi } from '@/services/api';
+import { customersApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import {
@@ -55,13 +55,7 @@ export function CustomersPage() {
   const [showFilters, setShowFilters] = useState(false);
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: customers, isLoading } = useQuery(
     ['customers', kennelId, search],

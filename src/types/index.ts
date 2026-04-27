@@ -25,6 +25,7 @@ export interface User {
   address?: string;
   city?: string;
   customerId?: string;
+  kennelId?: string;
   createdAt: string;
   updatedAt: string;
   lastLogin?: string;
@@ -41,6 +42,7 @@ export interface RegisterData {
   firstName: string;
   lastName: string;
   phone?: string;
+  kennelName?: string;
 }
 
 // Kennel types

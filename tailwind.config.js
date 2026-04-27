@@ -7,6 +7,32 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Dashboard Sidebar — Dark Forest
+        'sidebar': {
+          DEFAULT: '#0D5C4A',
+          dark: '#094A3B',
+          'icon-bg': 'rgba(255,255,255,0.12)',
+          'active-icon': '#22C55E',
+          'text-muted': 'rgba(255,255,255,0.6)',
+          divider: 'rgba(255,255,255,0.1)',
+        },
+        // Dashboard content
+        'dashboard': {
+          bg: '#F0F4F1',
+          card: '#FFFFFF',
+          border: '#E8EDE9',
+        },
+        // Accent colors for stat cards
+        'accent': {
+          green: '#22C55E',
+          'green-bg': '#DCFCE7',
+          blue: '#3B82F6',
+          'blue-bg': '#DBEAFE',
+          purple: '#8B5CF6',
+          'purple-bg': '#EDE9FE',
+          orange: '#F97316',
+          'orange-bg': '#FFEDD5',
+        },
         // Warm Earth + Pine Green Design System
         'apple-blue': '#4A5D52',
         'apple-blue-hover': '#3D4D44',

@@ -27,7 +27,7 @@ export function DogEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  useAuthStore();
+  const { user } = useAuthStore();
   const { addNotification } = useUIStore();
   const [newPhotos, setNewPhotos] = useState<string[]>([]);
 
@@ -37,20 +37,15 @@ export function DogEditPage() {
     { enabled: !!id }
   );
 
-  const { data: kennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels)
-  );
-
-  const { data: breeds } = useQuery(
+    const { data: breeds } = useQuery(
     'breeds',
     () => breedsApi.getAll().then((r) => r.data.breeds)
   );
 
   const { data: availableParents } = useQuery(
     'parents',
-    () => dogsApi.getParents({ kennelId: kennels?.[0]?.id || '', gender: 'MALE' }).then((r) => r.data.dogs),
-    { enabled: !!kennels?.[0]?.id }
+    () => dogsApi.getParents({ kennelId: user?.kennelId || '', gender: 'MALE' }).then((r) => r.data.dogs),
+    { enabled: !!user?.kennelId }
   );
 
   const {
@@ -85,7 +80,7 @@ export function DogEditPage() {
     async (data: DogFormData) => {
       const response = await dogsApi.update(id!, {
         ...data,
-        kennelId: dog?.kennelId || kennels?.[0]?.id || '',
+        kennelId: dog?.kennelId || user?.kennelId || '',
         photos: newPhotos.length ? newPhotos : undefined,
         price: data.price ? parseFloat(data.price) : null,
       });

@@ -26,13 +26,7 @@ export function PedigreesPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { data: myKennels } = useQuery(
-    'myKennelsPedigrees',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogs } = useQuery(
     ['dogs', kennelId],

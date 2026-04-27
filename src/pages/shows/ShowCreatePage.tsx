@@ -31,13 +31,7 @@ export function ShowCreatePage() {
   const { addNotification } = useUIStore();
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: kennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const {
+    const {
     register,
     handleSubmit,
     formState: { errors },
@@ -51,7 +45,7 @@ export function ShowCreatePage() {
     async (data: ShowFormData) => {
       const response = await showsApi.create({
         ...data,
-        kennelId: kennels?.[0]?.id || '',
+        kennelId: user?.kennelId || '',
       });
       return response.data;
     },

@@ -30,8 +30,7 @@ export function VerificationPage() {
   const { user } = useAuthStore();
   const isManager = user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isManager });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: verRes, isLoading } = useQuery(['verification', kennelId], () => reviewsApi.getVerification(kennelId || ''), { enabled: !!kennelId });
   const v = verRes?.data?.verification as any;

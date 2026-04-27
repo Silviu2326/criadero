@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { littersApi, dogsApi, kennelsApi } from '@/services/api';
+import { littersApi, dogsApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Loader2, Baby, Plus, Minus, Dog } from 'lucide-react';
@@ -27,13 +27,7 @@ export function LitterCreatePage() {
   const defaultFatherId = searchParams.get('fatherId') || '';
   const defaultMotherId = searchParams.get('motherId') || '';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: user?.role === 'MANAGER' || user?.role === 'BREEDER' }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogs } = useQuery(
     ['dogs', kennelId],

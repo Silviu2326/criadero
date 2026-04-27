@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { reservationsApi, dogsApi, customersApi, kennelsApi } from '@/services/api';
+import { reservationsApi, dogsApi, customersApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Loader2, Dog, User, Wallet, FileText } from 'lucide-react';
@@ -23,13 +23,7 @@ export function ReservationCreatePage() {
   const { addNotification } = useUIStore();
   const queryDogId = searchParams.get('dogId');
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: user?.role === 'MANAGER' || user?.role === 'BREEDER' }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogs } = useQuery(
     ['dogs', kennelId],

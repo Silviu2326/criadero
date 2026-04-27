@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { financeApi, kennelsApi, customersApi, dogsApi } from '@/services/api';
+import { financeApi, customersApi, dogsApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import {
@@ -33,13 +33,7 @@ export function InvoiceCreatePage() {
   const { addNotification } = useUIStore();
   const queryClient = useQueryClient();
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: user?.role === 'MANAGER' || user?.role === 'BREEDER' }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: customers } = useQuery(
     ['customers', kennelId],

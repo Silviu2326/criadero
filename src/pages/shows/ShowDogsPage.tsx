@@ -27,8 +27,7 @@ export function ShowDogsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ status: '' });
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isBreeder });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogsRes, isLoading } = useQuery(['showDogs', kennelId], () => showsApi.getShowDogs({ kennelId }), { enabled: !!kennelId });
   const showDogs = (dogsRes?.data?.showDogs || []) as any[];

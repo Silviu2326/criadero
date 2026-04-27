@@ -9,8 +9,7 @@ export function ReputationPage() {
   const { user } = useAuthStore();
   const isManager = user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isManager });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: repRes, isLoading } = useQuery(['reputation', kennelId], () => reviewsApi.getReputation(kennelId || ''), { enabled: !!kennelId });
   const rep = repRes?.data?.reputation as any;

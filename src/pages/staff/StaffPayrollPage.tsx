@@ -27,8 +27,7 @@ export function StaffPayrollPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ status: '' });
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isManager });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: payrollRes, isLoading } = useQuery(['payroll', kennelId], () => staffApi.getPayroll({ kennelId }), { enabled: !!kennelId });
   const payroll = (payrollRes?.data?.payroll || []) as any[];

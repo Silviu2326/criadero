@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
-import { tasksApi, kennelsApi, dogsApi, customersApi, usersApi } from '@/services/api';
+import { tasksApi, dogsApi, customersApi, usersApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft, Loader2, CheckSquare, FileText, Calendar, Tag, User, Dog, Users } from 'lucide-react';
@@ -30,13 +30,7 @@ export function TaskCreatePage() {
   const queryDogId = searchParams.get('dogId');
   const queryCustomerId = searchParams.get('customerId');
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: user?.role === 'MANAGER' || user?.role === 'BREEDER' || user?.role === 'VETERINARIAN' }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogsData } = useQuery(
     ['dogs', kennelId],

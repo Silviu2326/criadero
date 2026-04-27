@@ -41,13 +41,7 @@ export function EventModal({
   const isEditing = !!event;
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennelsCalendar',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder && !propKennelId }
-  );
-
-  const effectiveKennelId = propKennelId || myKennels?.[0]?.id;
+    const effectiveKennelId = propKennelId || user?.kennelId;
 
   const { data: dogs } = useQuery(
     ['dogs', effectiveKennelId],

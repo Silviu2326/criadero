@@ -34,7 +34,7 @@ export function KennelsPage() {
 
   const { data: myKennels, isLoading } = useQuery(
     'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels)
+    () => kennelsApi.getMyKennel().then((r) => [r.data.kennel])
   );
 
   const singleKennel = myKennels?.length === 1 ? myKennels[0] : null;

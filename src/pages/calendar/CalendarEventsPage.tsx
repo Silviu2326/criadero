@@ -52,13 +52,7 @@ export function CalendarEventsPage() {
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const { data: myKennels } = useQuery(
-    'myKennelsCalendarEvents',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: events, isLoading } = useQuery(
     ['calendarEventsList', kennelId, filters],

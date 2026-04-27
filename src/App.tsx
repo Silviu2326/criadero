@@ -14,9 +14,7 @@ import { RegisterPage } from '@/pages/auth/RegisterPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 
 // Kennel Pages
-import { KennelsPage } from '@/pages/kennels/KennelsPage';
-import { KennelDetailPage } from '@/pages/kennels/KennelDetailPage';
-import { KennelCreatePage } from '@/pages/kennels/KennelCreatePage';
+import { MyKennelPage } from '@/pages/kennels/MyKennelPage';
 
 // Dog Pages
 import { DogsPage } from '@/pages/dogs/DogsPage';
@@ -258,10 +256,11 @@ function App() {
         {/* Common Dashboard */}
         <Route path="/dashboard" element={<DashboardPage />} />
 
-        {/* Kennels */}
-        <Route path="/kennels" element={<KennelsPage />} />
-        <Route path="/kennels/create" element={<KennelCreatePage />} />
-        <Route path="/kennels/:id" element={<KennelDetailPage />} />
+        {/* My Kennel */}
+        <Route path="/my-kennel" element={<MyKennelPage />} />
+        <Route path="/kennels" element={<Navigate to="/my-kennel" replace />} />
+        <Route path="/kennels/create" element={<Navigate to="/my-kennel" replace />} />
+        <Route path="/kennels/:id" element={<Navigate to="/my-kennel" replace />} />
 
         {/* Dogs */}
         <Route path="/dogs" element={<DogsPage />} />

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
-import { clientReportApi, kennelsApi, dogsApi, customersApi } from '@/services/api';
+import { clientReportApi, dogsApi, customersApi } from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { ArrowLeft } from 'lucide-react';
@@ -14,13 +14,7 @@ export function ClientReportCreatePage() {
   const queryClient = useQueryClient();
   const isBreeder = user?.role === 'BREEDER' || user?.role === 'MANAGER';
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: dogsData } = useQuery(
     ['dogs', kennelId],

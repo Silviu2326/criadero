@@ -17,8 +17,7 @@ export function ShowResultsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ category: '' });
 
-  const { data: myKennels } = useQuery('myKennels', () => kennelsApi.getMyKennels().then((r) => r.data.kennels), { enabled: isBreeder });
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: resultsRes, isLoading } = useQuery(['showResults', kennelId], () => showsApi.getShowResults({ kennelId }), { enabled: !!kennelId });
   const results = (resultsRes?.data?.results || []) as any[];

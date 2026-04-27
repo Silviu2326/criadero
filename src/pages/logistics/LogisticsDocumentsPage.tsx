@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
-import { logisticsApi, kennelsApi } from '@/services/api';
+import { logisticsApi} from '@/services/api';
 import { useAuthStore } from '@/store/authStore';
 import { useUIStore } from '@/store/uiStore';
 import { PageHeader } from '@/components/common/PageHeader';
@@ -24,12 +24,7 @@ export function LogisticsDocumentsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({ type: '', valid: '' });
 
-  const { data: myKennels } = useQuery(
-    'myKennels',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: docsRes, isLoading } = useQuery(
     ['transitDocuments', kennelId],

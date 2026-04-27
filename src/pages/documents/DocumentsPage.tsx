@@ -65,13 +65,7 @@ export function DocumentsPage() {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
-  const { data: myKennels } = useQuery(
-    'myKennelsDocuments',
-    () => kennelsApi.getMyKennels().then((r) => r.data.kennels),
-    { enabled: isBreeder }
-  );
-
-  const kennelId = myKennels?.[0]?.id;
+    const kennelId = user?.kennelId;
 
   const { data: documents, isLoading } = useQuery(
     ['documents', kennelId, selectedType, searchQuery],
